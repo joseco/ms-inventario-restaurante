@@ -1,4 +1,5 @@
-﻿using Inventario.Domain.Models.Articulos;
+﻿using Inventario.Domain.Factories;
+using Inventario.Domain.Models.Articulos;
 using Inventario.Domain.Repositories;
 using MediatR;
 using Microsoft.Extensions.Logging;
@@ -14,16 +15,18 @@ namespace Inventario.Application.UseCases.Command.Articulos.CrearArticulo
     {
         private readonly IArticuloRepository articuloRepository;
         private readonly IUnitOfWork unitOfWork;
+        private readonly IArticuloFactory articuloFactory;
 
-        public CrearArticuloHandler(IArticuloRepository articuloRepository, IUnitOfWork unitOfWork)
+        public CrearArticuloHandler(IArticuloRepository articuloRepository, IUnitOfWork unitOfWork, IArticuloFactory articuloFactory)
         {
             this.articuloRepository = articuloRepository;
             this.unitOfWork = unitOfWork;
+            this.articuloFactory = articuloFactory;
         }
 
         public async Task<Guid> Handle(CrearArticuloCommand request, CancellationToken cancellationToken)
         {
-            var articulo = new Articulo(request.NombreArticulo);
+            var articulo = articuloFactory.Create(request.NombreArticulo, request.PrecioVenta);
 
             await articuloRepository.CreateAsync(articulo);
 

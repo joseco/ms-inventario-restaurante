@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using Inventario.Domain.Factories;
+using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -15,6 +16,7 @@ namespace Inventario.Application
         {
             services.AddMediatR(Assembly.GetExecutingAssembly());
 
+            services.AddSingleton<IArticuloFactory, ArticuloFactory>();
 
 
             return services;

@@ -16,7 +16,7 @@ namespace Inventario.Domain.Models.Articulos
 
         private Articulo() { }
 
-        public Articulo(string nombre)
+        internal Articulo(string nombre)
         {            
             Id = Guid.NewGuid();
             Nombre = nombre;

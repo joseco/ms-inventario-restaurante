@@ -11,9 +11,12 @@ namespace Inventario.Application.UseCases.Command.Articulos.CrearArticulo
     {
         public string NombreArticulo { get; private set; }
 
-        public CrearArticuloCommand(string nombreArticulo)
+        public decimal PrecioVenta { get; private set; }
+
+        public CrearArticuloCommand(string nombreArticulo, decimal precioVenta)
         {
             NombreArticulo = nombreArticulo;
+            PrecioVenta = precioVenta;
         }
 
         private CrearArticuloCommand()
